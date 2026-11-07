@@ -9,7 +9,10 @@ APP=/opt/oyun
 . /etc/os-release
 echo "== Sistem: $PRETTY_NAME"
 command -v apt >/dev/null || { echo "Bu betik apt (Debian/Ubuntu) bekliyor."; exit 1; }
-[ -f "$SRC/public/index.html" ] || { echo "HATA: $SRC/public/index.html yok. Oyun dosyasını oraya koy."; exit 1; }
+if [ ! -f "$SRC/public/index.html" ]; then
+  echo "UYARI: public/index.html yok, geçici bekleme sayfası kullanılıyor."
+  cp "$SRC/deploy/placeholder.html" "$SRC/public/index.html"
+fi
 
 echo "== Paketler"
 export DEBIAN_FRONTEND=noninteractive
