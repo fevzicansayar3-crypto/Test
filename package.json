@@ -1,0 +1,15 @@
+{
+  "name": "butun-dilleri-ogreniyoruz",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "patch-index": "node scripts/patch-index.js public/index.html",
+    "test": "node scripts/smoke-test.js"
+  },
+  "dependencies": {
+    "ws": "8.18.3"
+  }
+}

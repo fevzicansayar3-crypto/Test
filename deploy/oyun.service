@@ -1,0 +1,21 @@
+[Unit]
+Description=Butun Dilleri Ogreniyoruz
+After=network.target
+
+[Service]
+Type=simple
+User=oyun
+Group=oyun
+WorkingDirectory=/opt/oyun
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/node /opt/oyun/server.js
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/oyun/data
+
+[Install]
+WantedBy=multi-user.target
