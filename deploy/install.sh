@@ -11,7 +11,6 @@ echo "== Sistem: $PRETTY_NAME"
 command -v apt >/dev/null || { echo "Bu betik apt (Debian/Ubuntu) bekliyor."; exit 1; }
 if [ ! -f "$SRC/public/index.html" ]; then
   echo "UYARI: public/index.html yok, geçici bekleme sayfası kullanılıyor."
-  cp "$SRC/deploy/placeholder.html" "$SRC/public/index.html"
 fi
 
 echo "== Paketler"
@@ -39,6 +38,7 @@ id oyun >/dev/null 2>&1 || useradd --system --create-home --shell /usr/sbin/nolo
 mkdir -p "$APP/public" "$APP/data"
 install -m 644 "$SRC/package.json" "$SRC/package-lock.json" "$SRC/server.js" "$APP/"
 cp -r "$SRC/public/." "$APP/public/"
+[ -f "$SRC/public/index.html" ] || cp "$SRC/deploy/placeholder.html" "$APP/public/index.html"
 node "$SRC/scripts/patch-index.js" "$APP/public/index.html"
 chown -R oyun:oyun "$APP"
 cd "$APP" && sudo -u oyun npm ci --omit=dev
